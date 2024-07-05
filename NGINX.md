@@ -18,7 +18,7 @@ sudo nano /etc/nginx/sites-available/domain.com
 ```nginx configuration
 server {
     server_name domain.com;
-    root /var/www/elephant/public;
+    root /var/www/app/public;
 
     add_header X-Frame-Options "SAMEORIGIN";
     add_header X-Content-Type-Options "nosniff";
@@ -88,7 +88,7 @@ server {
     include mime.types;
 
     location / {
-        root /var/www/myapp/dist;
+        root /var/www/app/dist;
         try_files $uri  /index.html;
     }
 }
@@ -103,7 +103,7 @@ sudo chown -R www-data:www-data /var/www/domain.com
 ```
 
 ```shell
-sudo ln -s /etc/nginx/sites-available/yourdomain.com /etc/nginx/sites-enabled/
+sudo ln -s /etc/nginx/sites-available/domain.com /etc/nginx/sites-enabled/
 ```
 
 ```shell
@@ -115,7 +115,7 @@ sudo service nginx restart
 ### 2.1 First way
 
 ```shell
-sudo nano /etc/nginx/sites-available/my-website.com.conf
+sudo nano /etc/nginx/sites-available/domain.com.conf
 ```
 
 ```nginx configuration
@@ -125,18 +125,18 @@ server {
 ```
 
 ```shell
-sudo nano /etc/nginx/sites-available/www.my-website.com.conf
+sudo nano /etc/nginx/sites-available/www.domain.com.conf
 ```
 
 ```nginx configuration
 server {
-    server_name www.my-website.com;
+    server_name www.domain.com;
     return 301 $scheme://my-website.com$request_uri;
 }
 ```
 
 ```shell
-sudo ln -s /etc/nginx/sites-available/www.my-website.com.conf /etc/nginx/sites-enabled/
+sudo ln -s /etc/nginx/sites-available/www.domain.com.conf /etc/nginx/sites-enabled/
 ```
 
 ```shell
@@ -148,7 +148,7 @@ sudo service nginx restart
 ```
 
 ```shell
-curl -IL https://www.my-website.com
+curl -IL https://www.domain.com
 ```
 
 ### 2.2 Second way
